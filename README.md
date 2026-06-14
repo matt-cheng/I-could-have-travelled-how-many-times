@@ -17,6 +17,4 @@ Calculate how many flights you could have taken with a given amount of time.
 1. Create a GitHub repository
 2. Upload files
 3. Enable GitHub Pages
-4. Visit:
-
-https://yourusername.github.io/travel-opportunity-calculator
+4. Visit:https://yourusername.github.io/your-repo-name
