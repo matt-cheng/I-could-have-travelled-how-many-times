@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Opportunity Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="container">
+
     <h1>✈️ Travel Opportunity Calculator</h1>
+
+    <p class="subtitle">
+      How many trips could you have taken with your available time?
+    </p>
 
     <div class="card">
 
       <label>Total Available Time</label>
 
       <div class="time-row">
-        <input type="number" id="hours" placeholder="Hours" value="207">
-        <input type="number" id="minutes" placeholder="Minutes" value="55">
+        <input
+          type="number"
+          id="hours"
+          placeholder="Hours"
+          value="207"
+        >
+
+        <input
+          type="number"
+          id="minutes"
+          placeholder="Minutes"
+          value="55"
+        >
       </div>
 
       <label>Departure Airport</label>
-      <input type="text" id="from" placeholder="LAX">
+      <input
+        type="text"
+        id="from"
+        placeholder="LAX"
+      >
 
       <label>Arrival Airport</label>
-      <input type="text" id="to" placeholder="HND">
-
-      <label>Drive Time To Departure Airport (minutes)</label>
-      <input type="number" id="departDrive" value="45">
-
-      <label>Drive Time From Arrival Airport (minutes)</label>
-      <input type="number" id="arrivalDrive" value="30">
-
-      <label>Airport Buffer (minutes)</label>
-      <input type="number" id="buffer" value="90">
+      <input
+        type="text"
+        id="to"
+        placeholder="HND"
+      >
 
       <button onclick="calculateTrips()">
         Calculate
@@ -42,25 +57,24 @@
     </div>
 
     <div class="card results">
-      <h2>Results</h2>
+
+      <h2>Your Results</h2>
 
       <p id="flightTime"></p>
       <p id="oneWay"></p>
       <p id="roundTrip"></p>
       <p id="funFact"></p>
+
     </div>
 
     <div class="card">
-      <h2>Airport Examples</h2>
 
-      <ul>
-        <li>LAX → HND</li>
-        <li>LAX → NRT</li>
-        <li>LAX → KIX</li>
-        <li>SNA → HND</li>
-        <li>JFK → HND</li>
-      </ul>
+      <h2>🌎 Other Places You Could Have Gone</h2>
+
+      <div id="comparisons"></div>
+
     </div>
+
   </div>
 
   <script src="app.js"></script>
