@@ -1,0 +1,12 @@
+{
+"LAX":{"name":"Los Angeles International","lat":33.9425,"lon":-118.4081},
+"HND":{"name":"Tokyo Haneda","lat":35.5494,"lon":139.7798},
+"NRT":{"name":"Tokyo Narita","lat":35.7720,"lon":140.3929},
+"KIX":{"name":"Osaka Kansai","lat":34.4347,"lon":135.2440},
+"TPE":{"name":"Taipei Taoyuan","lat":25.0797,"lon":121.2342},
+"ICN":{"name":"Seoul Incheon","lat":37.4602,"lon":126.4407},
+"LHR":{"name":"London Heathrow","lat":51.4700,"lon":-0.4543},
+"CDG":{"name":"Paris Charles de Gaulle","lat":49.0097,"lon":2.5479},
+"JFK":{"name":"New York JFK","lat":40.6413,"lon":-73.7781},
+"HNL":{"name":"Honolulu","lat":21.3187,"lon":-157.922}
+}
