@@ -64,6 +64,11 @@ button {
   margin: 12px 0;
 }
 
+#funFact {
+  font-size: 22px;
+  font-weight: bold;
+}
+
 #comparisons ul {
   margin: 0;
   padding-left: 20px;
@@ -74,7 +79,9 @@ button {
 }
 
 @media (max-width: 600px) {
+
   .time-row {
     flex-direction: column;
   }
+
 }
