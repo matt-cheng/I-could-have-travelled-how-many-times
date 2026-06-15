@@ -103,12 +103,12 @@ function calculateTrips() {
 
   if (!flightTime) {
 
-    document.getElementById("flightTime").innerHTML =
+    document.getElementById("funFact").innerHTML =
       "⚠️ Route not found.";
 
     document.getElementById("oneWay").innerHTML = "";
     document.getElementById("roundTrip").innerHTML = "";
-    document.getElementById("funFact").innerHTML = "";
+    document.getElementById("flightTime").innerHTML = "";
 
     return;
   }
@@ -123,8 +123,8 @@ function calculateTrips() {
       totalHours / (flightTime * 2)
     );
 
-  document.getElementById("flightTime").innerHTML =
-    `Flight Time: ${flightTime.toFixed(1)} hours`;
+  document.getElementById("funFact").innerHTML =
+    `🎉 With ${totalHours.toFixed(2)} hours available, you could have flown from <strong>${from}</strong> to <strong>${to}</strong> <strong>${oneWayTrips}</strong> times.`;
 
   document.getElementById("oneWay").innerHTML =
     `✈️ One-Way Trips Possible: <strong>${oneWayTrips}</strong>`;
@@ -132,8 +132,8 @@ function calculateTrips() {
   document.getElementById("roundTrip").innerHTML =
     `🔁 Round Trips Possible: <strong>${roundTrips}</strong>`;
 
-  document.getElementById("funFact").innerHTML =
-    `🎉 With ${totalHours.toFixed(2)} hours available, you could have flown from ${from} to ${to} ${oneWayTrips} times.`;
+  document.getElementById("flightTime").innerHTML =
+    `Flight Time: ${flightTime.toFixed(1)} hours`;
 
   renderComparisons(totalHours);
 }
