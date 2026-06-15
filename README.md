@@ -1,20 +1,44 @@
-# I-could-have-travelled-how-many-times
-Showing how many flights you could've taken instead of sitting in traffic
-
 # Travel Opportunity Calculator
 
-Calculate how many flights you could have taken with a given amount of time.
+A simple calculator that answers:
+
+"How many trips could I have taken with this amount of time?"
 
 ## Features
 
 - One-way trip calculations
 - Round-trip calculations
-- Airport buffer adjustments
-- Drive time adjustments
+- Airport route lookup
+- Random destination comparisons
+- Mobile responsive
+- GitHub Pages compatible
+
+## Example
+
+207 hours 55 minutes
+
+LAX → HND
+
+Results:
+
+- 18 one-way trips
+- 9 round trips
+
+Plus comparisons against:
+
+- Tokyo
+- London
+- Sydney
+- Honolulu
+- New York
 
 ## Deploy
 
 1. Create a GitHub repository
 2. Upload files
-3. Enable GitHub Pages
-4. Visit:https://yourusername.github.io/your-repo-name
+3. Go to Settings → Pages
+4. Deploy from Main branch
+
+Your site will be live at:
+
+https://YOUR_USERNAME.github.io/travel-opportunity-calculator/
