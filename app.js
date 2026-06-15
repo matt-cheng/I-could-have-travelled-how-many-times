@@ -151,34 +151,51 @@
     updateUrl(fromCode, toCode, document.getElementById('hours').value, document.getElementById('minutes').value);
   }
 
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
   function buildComparisons(from, totalHours) {
-    const popular = [
-      'JFK', 'LAX', 'LHR', 'CDG', 'NRT', 'HND', 'ICN', 'SIN', 'DXB', 'SYD',
-      'HKG', 'BKK', 'FCO', 'AMS', 'FRA', 'MUC', 'ZRH', 'BCN', 'MAD', 'IST',
-      'DEL', 'BOM', 'PEK', 'PVG', 'TPE', 'KUL', 'MNL', 'MEX', 'GRU', 'EZE',
-      'JNB', 'CAI', 'ATL', 'ORD', 'DFW', 'SFO', 'MIA', 'SEA', 'BOS', 'YVR'
+    const domestic = [
+      'JFK', 'LAX', 'ATL', 'ORD', 'DFW', 'SFO', 'MIA', 'SEA', 'BOS', 'DEN',
+      'IAH', 'MSP', 'DTW', 'PHX', 'EWR', 'CLT', 'LAS', 'MCO', 'SAN', 'PDX'
+    ];
+    const international = [
+      'LHR', 'CDG', 'NRT', 'HND', 'ICN', 'SIN', 'DXB', 'SYD', 'HKG', 'BKK',
+      'FCO', 'AMS', 'FRA', 'BCN', 'MAD', 'IST', 'DEL', 'PEK', 'TPE', 'KUL',
+      'MNL', 'MEX', 'GRU', 'EZE', 'JNB', 'CAI', 'YVR', 'NBO', 'LIS', 'DOH'
     ];
 
     const fromCode = fromSelect.getValue();
-    const comparisons = [];
     const seenCities = new Set();
 
-    for (const code of popular) {
-      if (code === fromCode) continue;
-      const ap = getAirport(code);
-      if (!ap) continue;
-      const cityKey = (ap.city || ap.name).toLowerCase();
-      if (seenCities.has(cityKey)) continue;
-      seenCities.add(cityKey);
-      const d = haversine(from.lat, from.lon, ap.lat, ap.lon);
-      const trips = Math.floor(totalHours / flightTime(d));
-      if (trips > 0) {
-        comparisons.push({ airport: ap, dist: d, trips: trips });
+    function pickValid(pool, count) {
+      const results = [];
+      const shuffled = shuffle([...pool]);
+      for (const code of shuffled) {
+        if (code === fromCode) continue;
+        const ap = getAirport(code);
+        if (!ap) continue;
+        const cityKey = (ap.city || ap.name).toLowerCase();
+        if (seenCities.has(cityKey)) continue;
+        const d = haversine(from.lat, from.lon, ap.lat, ap.lon);
+        const trips = Math.floor(totalHours / flightTime(d));
+        if (trips > 0) {
+          seenCities.add(cityKey);
+          results.push({ airport: ap, dist: d, trips: trips });
+        }
+        if (results.length >= count) break;
       }
+      return results;
     }
 
-    comparisons.sort((a, b) => a.dist - b.dist);
-    const shown = comparisons.slice(0, 10);
+    const usPicks = pickValid(domestic, 3);
+    const intlPicks = pickValid(international, 3);
+    const shown = [...usPicks, ...intlPicks].sort((a, b) => a.dist - b.dist);
 
     const html = shown.map(c => {
       return `<div class="comparison-item">
@@ -250,8 +267,8 @@
 
   document.getElementById('calcBtn').addEventListener('click', calculateTrips);
   document.getElementById('shareBtn').addEventListener('click', copyShareableLink);
-  document.getElementById('hours').addEventListener('keydown', e => { if (e.key === 'Enter') calculateTrips(); });
-  document.getElementById('minutes').addEventListener('keydown', e => { if (e.key === 'Enter') calculateTrips(); });
+  document.getElementById('hours').addEventListener('input', calculateTrips);
+  document.getElementById('minutes').addEventListener('input', calculateTrips);
 
   initDarkMode();
   loadAirports();
