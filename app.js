@@ -10,7 +10,7 @@
 
   function countryToFlag(code) {
     if (!code || code.length !== 2) return '';
-    return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E5 + c.charCodeAt(0)));
+    return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1A5 + c.charCodeAt(0)));
   }
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -126,13 +126,10 @@
     const oneWay = Math.floor(totalHours / flight);
     const roundTrip = Math.floor(totalHours / (flight * 2));
 
-    const fromFlag = countryToFlag(from.country);
-    const toFlag = countryToFlag(to.country);
-
     document.getElementById('funFact').innerHTML =
       `With <b>${totalHours.toFixed(1)} hours</b>, you could have flown from ` +
-      `${fromFlag} <b>${from.city || from.name} (${fromCode})</b> to ` +
-      `${toFlag} <b>${to.city || to.name} (${toCode})</b> ` +
+      `<b>${from.city || from.name} (${fromCode})</b> to ` +
+      `<b>${to.city || to.name} (${toCode})</b> ` +
       `<b>${oneWay.toLocaleString()}</b> time${oneWay !== 1 ? 's' : ''}.`;
 
     const totalMilesFlown = dist * oneWay;
