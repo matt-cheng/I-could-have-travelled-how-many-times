@@ -3,7 +3,6 @@
 
   const EARTH_CIRCUMFERENCE_MILES = 24901;
   const AVG_SPEED_MPH = 550;
-  const OVERHEAD_HOURS = 1.5;
 
   const COUNTRY_FLAGS = {};
   const airports = [];
@@ -25,7 +24,7 @@
   }
 
   function flightTime(miles) {
-    return (miles / AVG_SPEED_MPH) + OVERHEAD_HOURS;
+    return miles / AVG_SPEED_MPH;
   }
 
   async function loadAirports() {

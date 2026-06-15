@@ -31,4 +31,4 @@ app.js       — Airport loading, search, calculation, URL sync, dark mode
 
 ## How it works
 
-Flight time is estimated as `(distance / 550 mph) + 1.5 hours` overhead (taxiing, boarding, etc.). Distance uses the haversine formula. The "around the world" stat divides total one-way miles flown by Earth's circumference (24,901 miles).
+Flight time is estimated as `distance / 550 mph`. Distance uses the haversine formula. The "around the world" stat divides total one-way miles flown by Earth's circumference (24,901 miles).
