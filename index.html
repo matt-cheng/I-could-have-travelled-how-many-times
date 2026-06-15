@@ -1,88 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Opportunity Calculator</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Travel Opportunity Calculator</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+<h1>✈️ Travel Opportunity Calculator</h1>
+<p class="subtitle">How many flights could you have taken instead?</p>
 
-  <div class="container">
+<div class="card">
+<div class="grid">
+<div>
+<label>Hours</label>
+<input type="number" id="hours" value="207">
+</div>
+<div>
+<label>Minutes</label>
+<input type="number" id="minutes" value="55">
+</div>
+</div>
 
-    <h1>✈️ Travel Opportunity Calculator</h1>
+<label>Departure Airport</label>
+<select id="from"></select>
 
-    <p class="subtitle">
-      How many trips could you have taken with your available time?
-    </p>
+<label>Arrival Airport</label>
+<select id="to"></select>
 
-    <div class="card">
+<button onclick="calculateTrips()">Calculate</button>
+</div>
 
-      <label>Total Available Time</label>
+<div class="card hero">
+<div id="funFact"></div>
+<div class="stats">
+<div class="stat"><span id="oneWay"></span><small>One-Way Trips</small></div>
+<div class="stat"><span id="roundTrip"></span><small>Round Trips</small></div>
+<div class="stat"><span id="flightTime"></span><small>Flight Hours</small></div>
+<div class="stat"><span id="distance"></span><small>Miles</small></div>
+</div>
+</div>
 
-      <div class="time-row">
-        <input
-          type="number"
-          id="hours"
-          placeholder="Hours"
-          value="207"
-        >
+<div class="card">
+<h2>🌎 Other Places You Could Have Gone</h2>
+<div id="comparisons"></div>
+</div>
+</div>
 
-        <input
-          type="number"
-          id="minutes"
-          placeholder="Minutes"
-          value="55"
-        >
-      </div>
-
-      <label>Departure Airport</label>
-      <input
-        type="text"
-        id="from"
-        placeholder="LAX"
-        value="LAX"
-      >
-
-      <label>Arrival Airport</label>
-      <input
-        type="text"
-        id="to"
-        placeholder="HND"
-        value="HND"
-      >
-
-      <button onclick="calculateTrips()">
-        Calculate
-      </button>
-
-    </div>
-
-    <div class="card results">
-
-      <h2>Your Results</h2>
-
-      <p id="funFact"></p>
-
-      <p id="oneWay"></p>
-
-      <p id="roundTrip"></p>
-
-      <p id="flightTime"></p>
-
-    </div>
-
-    <div class="card">
-
-      <h2>🌎 Other Places You Could Have Gone</h2>
-
-      <div id="comparisons"></div>
-
-    </div>
-
-  </div>
-
-  <script src="app.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

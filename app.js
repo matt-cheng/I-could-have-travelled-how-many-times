@@ -1,173 +1,37 @@
-const routes = {
-
-  "LAX-HND": 11.5,
-  "LAX-NRT": 11.0,
-  "LAX-KIX": 12.0,
-
-  "LAX-TPE": 14.0,
-  "LAX-ICN": 13.0,
-  "LAX-HKG": 15.0,
-
-  "LAX-SYD": 15.0,
-  "LAX-AKL": 13.5,
-
-  "LAX-CDG": 11.0,
-  "LAX-LHR": 10.5,
-  "LAX-FCO": 12.0,
-
-  "LAX-JFK": 5.5,
-  "LAX-BOS": 5.8,
-  "LAX-MIA": 5.2,
-
-  "SFO-HND": 10.8,
-  "JFK-HND": 14.0
+const airportData={
+LAX:{name:'Los Angeles International',lat:33.9425,lon:-118.4081},
+HND:{name:'Tokyo Haneda',lat:35.5494,lon:139.7798},
+NRT:{name:'Tokyo Narita',lat:35.772,lon:140.3929},
+LHR:{name:'London Heathrow',lat:51.47,lon:-0.4543},
+CDG:{name:'Paris Charles de Gaulle',lat:49.0097,lon:2.5479},
+ICN:{name:'Seoul Incheon',lat:37.4602,lon:126.4407},
+TPE:{name:'Taipei Taoyuan',lat:25.0797,lon:121.2342},
+JFK:{name:'New York JFK',lat:40.6413,lon:-73.7781}
 };
 
-const comparisonDestinations = [
-  {
-    destination: "Tokyo 🇯🇵",
-    hours: 11.5
-  },
-  {
-    destination: "Taipei 🇹🇼",
-    hours: 14
-  },
-  {
-    destination: "Seoul 🇰🇷",
-    hours: 13
-  },
-  {
-    destination: "Hong Kong 🇭🇰",
-    hours: 15
-  },
-  {
-    destination: "Honolulu 🌴",
-    hours: 6
-  },
-  {
-    destination: "New York 🗽",
-    hours: 5.5
-  },
-  {
-    destination: "London 🇬🇧",
-    hours: 10.5
-  },
-  {
-    destination: "Paris 🇫🇷",
-    hours: 11
-  },
-  {
-    destination: "Rome 🇮🇹",
-    hours: 12
-  },
-  {
-    destination: "Sydney 🇦🇺",
-    hours: 15
-  }
-];
+function hav(a,b,c,d){const R=3959;const dLat=(c-a)*Math.PI/180;const dLon=(d-b)*Math.PI/180;const x=Math.sin(dLat/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
 
-function calculateTrips() {
+Object.entries(airportData).forEach(([c,a])=>{
+from.add(new Option(`${a.name} (${c})`,c));
+to.add(new Option(`${a.name} (${c})`,c));
+});
+new TomSelect('#from'); new TomSelect('#to');
+from.value='LAX'; to.value='HND';
 
-  const hours =
-    Number(
-      document.getElementById("hours").value
-    );
-
-  const minutes =
-    Number(
-      document.getElementById("minutes").value
-    );
-
-  const totalHours =
-    hours + (minutes / 60);
-
-  const from =
-    document
-      .getElementById("from")
-      .value
-      .trim()
-      .toUpperCase();
-
-  const to =
-    document
-      .getElementById("to")
-      .value
-      .trim()
-      .toUpperCase();
-
-  const routeKey =
-    `${from}-${to}`;
-
-  const flightTime =
-    routes[routeKey];
-
-  if (!flightTime) {
-
-    document.getElementById("funFact").innerHTML =
-      "⚠️ Route not found.";
-
-    document.getElementById("oneWay").innerHTML = "";
-    document.getElementById("roundTrip").innerHTML = "";
-    document.getElementById("flightTime").innerHTML = "";
-
-    return;
-  }
-
-  const oneWayTrips =
-    Math.floor(
-      totalHours / flightTime
-    );
-
-  const roundTrips =
-    Math.floor(
-      totalHours / (flightTime * 2)
-    );
-
-  document.getElementById("funFact").innerHTML =
-    `🎉 With ${totalHours.toFixed(2)} hours available, you could have flown from <strong>${from}</strong> to <strong>${to}</strong> <strong>${oneWayTrips}</strong> times.`;
-
-  document.getElementById("oneWay").innerHTML =
-    `✈️ One-Way Trips Possible: <strong>${oneWayTrips}</strong>`;
-
-  document.getElementById("roundTrip").innerHTML =
-    `🔁 Round Trips Possible: <strong>${roundTrips}</strong>`;
-
-  document.getElementById("flightTime").innerHTML =
-    `Flight Time: ${flightTime.toFixed(1)} hours`;
-
-  renderComparisons(totalHours);
+function calculateTrips(){
+const total=+hours.value + (+minutes.value/60);
+const f=airportData[from.value], t=airportData[to.value];
+const dist=hav(f.lat,f.lon,t.lat,t.lon);
+const flight=(dist/550)+1.5;
+const ow=Math.floor(total/flight);
+const rt=Math.floor(total/(flight*2));
+funFact.innerHTML=`With ${total.toFixed(2)} hours, you could have flown from <b>${from.value}</b> to <b>${to.value}</b> <b>${ow}</b> times.`;
+oneWay.textContent=ow; roundTrip.textContent=rt;
+flightTime.textContent=flight.toFixed(1); distance.textContent=Math.round(dist).toLocaleString();
+comparisons.innerHTML='<ul>'+Object.entries(airportData).filter(([k])=>k!==from.value).slice(0,5).map(([k,a])=>{
+const d=hav(f.lat,f.lon,a.lat,a.lon);
+const trips=Math.floor(total/((d/550)+1.5));
+return `<li>${a.name} (${k}) — <b>${trips}</b> one-way flights</li>`;
+}).join('')+'</ul>';
 }
-
-function renderComparisons(totalHours) {
-
-  const randomFive =
-    [...comparisonDestinations]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 5);
-
-  let html = "<ul>";
-
-  randomFive.forEach(item => {
-
-    const trips =
-      Math.floor(
-        totalHours / item.hours
-      );
-
-    html += `
-      <li>
-        ${item.destination}
-        —
-        <strong>${trips}</strong>
-        one-way flights
-      </li>
-    `;
-  });
-
-  html += "</ul>";
-
-  document.getElementById("comparisons").innerHTML =
-    html;
-}
-
 calculateTrips();
