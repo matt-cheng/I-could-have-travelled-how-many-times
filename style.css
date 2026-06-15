@@ -1,13 +1,262 @@
-body{font-family:Inter,Arial,sans-serif;background:#eef2f7;padding:20px}
-.container{max-width:900px;margin:auto}
-.card{background:#fff;border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.hero{text-align:center}
-h1{margin-bottom:4px}.subtitle{color:#666}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-input,select,button{width:100%;padding:12px;margin-top:6px}
-button{border:none;border-radius:10px;font-weight:bold;cursor:pointer}
-#funFact{font-size:1.5rem;font-weight:700;margin-bottom:20px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-.stat{background:#f7f9fc;padding:16px;border-radius:12px}
-.stat span{display:block;font-size:2rem;font-weight:bold}
-li{margin:10px 0}
+:root {
+  --bg: #eef2f7;
+  --card-bg: #ffffff;
+  --text: #1a1a2e;
+  --text-secondary: #666;
+  --stat-bg: #f7f9fc;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --border: #e0e0e0;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --input-bg: #fff;
+  --world-bg: #f0f7ff;
+  --world-border: #bfdbfe;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --stat-bg: #334155;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --border: #475569;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --input-bg: #334155;
+  --world-bg: #1e3a5f;
+  --world-border: #2563eb;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container { max-width: 900px; margin: auto; }
+
+header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+h1 { font-size: 2rem; margin-bottom: 4px; }
+h2 { margin-bottom: 16px; font-size: 1.3rem; }
+.subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+
+.dark-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: background 0.3s;
+}
+
+.icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-moon { display: inline; }
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px var(--shadow);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.hero { text-align: center; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text);
+  transition: border 0.2s;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: var(--accent-hover); }
+
+#funFact {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+#worldTrips {
+  background: var(--world-bg);
+  border: 1px solid var(--world-border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.stat {
+  background: var(--stat-bg);
+  padding: 16px;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+.stat span {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.stat small {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-item:last-child { border-bottom: none; }
+
+.comparison-flag {
+  font-size: 1.6rem;
+  margin-right: 12px;
+  min-width: 32px;
+  text-align: center;
+}
+
+.comparison-info { flex: 1; }
+.comparison-info strong { display: block; }
+.comparison-info small { color: var(--text-secondary); }
+.comparison-trips {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin-left: 12px;
+}
+
+.loading-card { text-align: center; padding: 40px; }
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer {
+  text-align: center;
+  padding: 12px;
+}
+
+.btn-share {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  transition: background 0.2s;
+}
+
+.btn-share:hover { background: var(--stat-bg); }
+
+.footer-note {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.ts-wrapper { margin-top: 6px; }
+.ts-control {
+  background: var(--input-bg) !important;
+  border-color: var(--border) !important;
+  border-radius: 10px !important;
+  padding: 10px 12px !important;
+  color: var(--text) !important;
+}
+.ts-control input { color: var(--text) !important; }
+.ts-dropdown {
+  background: var(--card-bg) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.ts-dropdown .active { background: var(--stat-bg) !important; }
+.ts-dropdown .option { color: var(--text) !important; }
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.5rem; }
+  #funFact { font-size: 1.1rem; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat span { font-size: 1.5rem; }
+}
