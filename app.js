@@ -8,10 +8,6 @@
   const airports = [];
   let fromSelect, toSelect;
 
-  function countryToFlag(code) {
-    if (!code || code.length !== 2) return '';
-    return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1A5 + c.charCodeAt(0)));
-  }
 
   function haversine(lat1, lon1, lat2, lon2) {
     const R = 3959;
@@ -71,7 +67,7 @@
   function initSelects() {
     const options = airports.map(ap => ({
       value: ap.iata,
-      text: `${countryToFlag(ap.country)} ${ap.city || ap.name} — ${ap.name} (${ap.iata})`,
+      text: `${ap.city || ap.name} — ${ap.name} (${ap.iata})`,
       city: ap.city,
       name: ap.name,
       country: ap.country,
@@ -85,16 +81,13 @@
       sortField: [{ field: 'city', direction: 'asc' }],
       render: {
         option: function(data, escape) {
-          const flag = countryToFlag(data.country);
           return `<div class="option">
-            <span style="margin-right:8px">${flag}</span>
             <strong>${escape(data.city || data.name)}</strong>
             <span style="opacity:0.6;margin-left:6px">${escape(data.name)} (${escape(data.iata)})</span>
           </div>`;
         },
         item: function(data, escape) {
-          const flag = countryToFlag(data.country);
-          return `<div>${flag} ${escape(data.city || data.name)} (${escape(data.iata)})</div>`;
+          return `<div>${escape(data.city || data.name)} (${escape(data.iata)})</div>`;
         }
       }
     };
@@ -188,9 +181,7 @@
     const shown = comparisons.slice(0, 10);
 
     const html = shown.map(c => {
-      const flag = countryToFlag(c.airport.country);
       return `<div class="comparison-item">
-        <span class="comparison-flag">${flag}</span>
         <div class="comparison-info">
           <strong>${c.airport.city || c.airport.name} (${c.airport.iata})</strong>
           <small>${Math.round(c.dist).toLocaleString()} miles</small>
