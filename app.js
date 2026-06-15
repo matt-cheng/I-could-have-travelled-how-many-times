@@ -1,38 +1,96 @@
-// Approximate nonstop flight durations in hours
-
 const routes = {
+
   "LAX-HND": 11.5,
   "LAX-NRT": 11.0,
   "LAX-KIX": 12.0,
 
-  "SNA-HND": 13.0,
-  "JFK-HND": 14.0,
-
   "LAX-TPE": 14.0,
   "LAX-ICN": 13.0,
+  "LAX-HKG": 15.0,
+
+  "LAX-SYD": 15.0,
+  "LAX-AKL": 13.5,
+
   "LAX-CDG": 11.0,
-  "LAX-LHR": 10.5
+  "LAX-LHR": 10.5,
+  "LAX-FCO": 12.0,
+
+  "LAX-JFK": 5.5,
+  "LAX-BOS": 5.8,
+  "LAX-MIA": 5.2,
+
+  "SFO-HND": 10.8,
+  "JFK-HND": 14.0
 };
+
+const comparisonDestinations = [
+  {
+    destination: "Tokyo 🇯🇵",
+    hours: 11.5
+  },
+  {
+    destination: "Taipei 🇹🇼",
+    hours: 14
+  },
+  {
+    destination: "Seoul 🇰🇷",
+    hours: 13
+  },
+  {
+    destination: "Hong Kong 🇭🇰",
+    hours: 15
+  },
+  {
+    destination: "Honolulu 🌴",
+    hours: 6
+  },
+  {
+    destination: "New York 🗽",
+    hours: 5.5
+  },
+  {
+    destination: "London 🇬🇧",
+    hours: 10.5
+  },
+  {
+    destination: "Paris 🇫🇷",
+    hours: 11
+  },
+  {
+    destination: "Rome 🇮🇹",
+    hours: 12
+  },
+  {
+    destination: "Sydney 🇦🇺",
+    hours: 15
+  }
+];
 
 function calculateTrips() {
 
   const hours =
-    Number(document.getElementById("hours").value);
+    Number(
+      document.getElementById("hours").value
+    );
 
   const minutes =
-    Number(document.getElementById("minutes").value);
+    Number(
+      document.getElementById("minutes").value
+    );
 
   const totalHours =
     hours + (minutes / 60);
 
   const from =
-    document.getElementById("from")
+    document
+      .getElementById("from")
       .value
       .trim()
       .toUpperCase();
 
   const to =
-    document.getElementById("to")
+    document
+      .getElementById("to")
       .value
       .trim()
       .toUpperCase();
@@ -45,34 +103,25 @@ function calculateTrips() {
 
   if (!flightTime) {
 
-    alert(
-      `Route ${routeKey} not found.
-Add it to app.js or connect to an API.`
-    );
+    document.getElementById("flightTime").innerHTML =
+      "⚠️ Route not found.";
+
+    document.getElementById("oneWay").innerHTML = "";
+    document.getElementById("roundTrip").innerHTML = "";
+    document.getElementById("funFact").innerHTML = "";
 
     return;
   }
 
-  const departDrive =
-    Number(document.getElementById("departDrive").value);
-
-  const arrivalDrive =
-    Number(document.getElementById("arrivalDrive").value);
-
-  const buffer =
-    Number(document.getElementById("buffer").value);
-
-  const oneWayDuration =
-      flightTime
-    + (departDrive / 60)
-    + (arrivalDrive / 60)
-    + (buffer / 60);
-
   const oneWayTrips =
-    Math.floor(totalHours / oneWayDuration);
+    Math.floor(
+      totalHours / flightTime
+    );
 
   const roundTrips =
-    Math.floor(totalHours / (oneWayDuration * 2));
+    Math.floor(
+      totalHours / (flightTime * 2)
+    );
 
   document.getElementById("flightTime").innerHTML =
     `Flight Time: ${flightTime.toFixed(1)} hours`;
@@ -84,5 +133,41 @@ Add it to app.js or connect to an API.`
     `🔁 Round Trips Possible: <strong>${roundTrips}</strong>`;
 
   document.getElementById("funFact").innerHTML =
-    `🎉 You could have flown from ${from} to ${to} ${oneWayTrips} times.`;
+    `🎉 With ${totalHours.toFixed(2)} hours available, you could have flown from ${from} to ${to} ${oneWayTrips} times.`;
+
+  renderComparisons(totalHours);
 }
+
+function renderComparisons(totalHours) {
+
+  const randomFive =
+    [...comparisonDestinations]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 5);
+
+  let html = "<ul>";
+
+  randomFive.forEach(item => {
+
+    const trips =
+      Math.floor(
+        totalHours / item.hours
+      );
+
+    html += `
+      <li>
+        ${item.destination}
+        —
+        <strong>${trips}</strong>
+        one-way flights
+      </li>
+    `;
+  });
+
+  html += "</ul>";
+
+  document.getElementById("comparisons").innerHTML =
+    html;
+}
+
+calculateTrips();
