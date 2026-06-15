@@ -1,4 +1,4 @@
-# Travel Opportunity Calculator
+# Travel Opportunity Calculator v2
 
 Ever wonder how many flights you could have taken with all that time spent in meetings, on hold, or binge-watching? Enter your hours and pick two airports — this calculator tells you how many times you could have made the trip.
 

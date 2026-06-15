@@ -171,11 +171,15 @@
 
     const fromCode = fromSelect.getValue();
     const comparisons = [];
+    const seenCities = new Set();
 
     for (const code of popular) {
       if (code === fromCode) continue;
       const ap = getAirport(code);
       if (!ap) continue;
+      const cityKey = (ap.city || ap.name).toLowerCase();
+      if (seenCities.has(cityKey)) continue;
+      seenCities.add(cityKey);
       const d = haversine(from.lat, from.lon, ap.lat, ap.lon);
       const trips = Math.floor(totalHours / flightTime(d));
       if (trips > 0) {
