@@ -336,6 +336,15 @@
   document.getElementById('minutes').addEventListener('input', calculateTrips);
   document.getElementById('estimateBtn').addEventListener('click', estimateTrafficTime);
   document.getElementById('useEstimateBtn').addEventListener('click', useTrafficEstimate);
+  document.getElementById('toggleEstimator').addEventListener('click', function(e) {
+    e.preventDefault();
+    const panel = document.getElementById('trafficEstimator');
+    const isHidden = panel.style.display === 'none';
+    panel.style.display = isHidden ? 'block' : 'none';
+    this.textContent = isHidden
+      ? 'Hide traffic estimator'
+      : "Don’t know your commute time? Click here to estimate.";
+  });
 
   initDarkMode();
   loadAirports();

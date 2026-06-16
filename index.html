@@ -18,7 +18,31 @@
 </button>
 </header>
 
-<div class="card" id="trafficEstimator">
+<div class="card">
+<h2>Flight Comparison</h2>
+<div class="grid">
+<div>
+<label for="hours">Hours</label>
+<input type="number" id="hours" value="207" min="0">
+</div>
+<div>
+<label for="minutes">Minutes</label>
+<input type="number" id="minutes" value="55" min="0" max="59">
+</div>
+</div>
+
+<label for="from-select">Departure Airport</label>
+<select id="from-select" placeholder="Search by city, airport name, or code..."></select>
+
+<label for="to-select">Arrival Airport</label>
+<select id="to-select" placeholder="Search by city, airport name, or code..."></select>
+
+<button id="calcBtn" class="btn-primary">Calculate</button>
+
+<a href="#" id="toggleEstimator" class="estimator-toggle">Don't know your commute time? Click here to estimate.</a>
+</div>
+
+<div class="card" id="trafficEstimator" style="display:none">
 <h2>Traffic Time Estimator</h2>
 <p class="section-desc">Estimate how much time you spend sitting in traffic per year.</p>
 
@@ -83,29 +107,7 @@
 </div>
 
 <button id="estimateBtn" class="btn-primary btn-secondary">Estimate Traffic Time</button>
-<button id="useEstimateBtn" class="btn-primary btn-use" style="display:none">Use This Estimate Above ↓</button>
-</div>
-
-<div class="card">
-<h2>Flight Comparison</h2>
-<div class="grid">
-<div>
-<label for="hours">Hours</label>
-<input type="number" id="hours" value="207" min="0">
-</div>
-<div>
-<label for="minutes">Minutes</label>
-<input type="number" id="minutes" value="55" min="0" max="59">
-</div>
-</div>
-
-<label for="from-select">Departure Airport</label>
-<select id="from-select" placeholder="Search by city, airport name, or code..."></select>
-
-<label for="to-select">Arrival Airport</label>
-<select id="to-select" placeholder="Search by city, airport name, or code..."></select>
-
-<button id="calcBtn" class="btn-primary">Calculate</button>
+<button id="useEstimateBtn" class="btn-primary btn-use" style="display:none">Use This Estimate ↑</button>
 </div>
 
 <div class="card hero" id="results" style="display:none">
