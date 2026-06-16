@@ -4,6 +4,71 @@
   const EARTH_CIRCUMFERENCE_MILES = 24901;
   const AVG_SPEED_MPH = 550;
 
+  // Peak traffic congestion data: delay in minutes per mile during peak hours
+  // Based on urban congestion indices (INRIX / TomTom style data)
+  const CITY_CONGESTION = {
+    'los-angeles':    { name: 'Los Angeles',    delayPerMile: 3.2, freeFlowMph: 35 },
+    'san-francisco':  { name: 'San Francisco',  delayPerMile: 2.9, freeFlowMph: 30 },
+    'new-york':       { name: 'New York',       delayPerMile: 3.5, freeFlowMph: 25 },
+    'seattle':        { name: 'Seattle',        delayPerMile: 2.6, freeFlowMph: 32 },
+    'chicago':        { name: 'Chicago',        delayPerMile: 2.7, freeFlowMph: 33 },
+    'washington-dc':  { name: 'Washington DC',  delayPerMile: 2.8, freeFlowMph: 30 },
+    'boston':          { name: 'Boston',         delayPerMile: 2.9, freeFlowMph: 28 },
+    'houston':        { name: 'Houston',        delayPerMile: 2.2, freeFlowMph: 38 },
+    'atlanta':        { name: 'Atlanta',        delayPerMile: 2.4, freeFlowMph: 36 },
+    'miami':          { name: 'Miami',          delayPerMile: 2.5, freeFlowMph: 34 },
+    'dallas':         { name: 'Dallas',         delayPerMile: 2.1, freeFlowMph: 38 },
+    'denver':         { name: 'Denver',         delayPerMile: 2.0, freeFlowMph: 37 },
+    'phoenix':        { name: 'Phoenix',        delayPerMile: 1.8, freeFlowMph: 40 },
+    'portland':       { name: 'Portland',       delayPerMile: 2.3, freeFlowMph: 33 },
+    'san-diego':      { name: 'San Diego',      delayPerMile: 2.1, freeFlowMph: 36 }
+  };
+
+  function estimateTrafficTime() {
+    const cityKey = document.getElementById('city-select').value;
+    const distance = +document.getElementById('commute-distance').value;
+    const peakPercent = +document.getElementById('peak-percent').value / 100;
+    const daysPerWeek = +document.getElementById('days-per-week').value;
+    const weeksPerYear = +document.getElementById('weeks-per-year').value;
+
+    if (!cityKey || !distance) return;
+
+    const city = CITY_CONGESTION[cityKey];
+    const peakMiles = distance * peakPercent;
+    const offPeakMiles = distance * (1 - peakPercent);
+
+    // Extra delay per one-way trip (minutes beyond free-flow)
+    const extraDelayOneWay = peakMiles * city.delayPerMile;
+    // Round trip extra delay per day
+    const dailyExtraMinutes = extraDelayOneWay * 2;
+    const weeklyExtraHours = (dailyExtraMinutes * daysPerWeek) / 60;
+    const annualExtraHours = weeklyExtraHours * weeksPerYear;
+
+    document.getElementById('dailyTraffic').textContent = Math.round(dailyExtraMinutes);
+    document.getElementById('weeklyTraffic').textContent = weeklyExtraHours.toFixed(1);
+    document.getElementById('annualTraffic').textContent = Math.round(annualExtraHours);
+
+    const freeFlowTime = (distance / city.freeFlowMph) * 60;
+    const actualTime = freeFlowTime + extraDelayOneWay;
+    document.getElementById('trafficNote').textContent =
+      `In ${city.name}, a ${distance}-mile commute takes ~${Math.round(freeFlowTime)} min free-flow ` +
+      `but ~${Math.round(actualTime)} min in peak traffic. ` +
+      `That's ${Math.round(annualExtraHours)} hours/year you lose just sitting in traffic.`;
+
+    document.getElementById('trafficResult').style.display = 'block';
+    document.getElementById('useEstimateBtn').style.display = 'inline-block';
+
+    window._lastTrafficEstimate = { hours: Math.floor(annualExtraHours), minutes: Math.round((annualExtraHours % 1) * 60) };
+  }
+
+  function useTrafficEstimate() {
+    if (!window._lastTrafficEstimate) return;
+    document.getElementById('hours').value = window._lastTrafficEstimate.hours;
+    document.getElementById('minutes').value = window._lastTrafficEstimate.minutes;
+    calculateTrips();
+    document.getElementById('hours').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   const COUNTRY_FLAGS = {};
   const airports = [];
   let fromSelect, toSelect;
@@ -269,6 +334,8 @@
   document.getElementById('shareBtn').addEventListener('click', copyShareableLink);
   document.getElementById('hours').addEventListener('input', calculateTrips);
   document.getElementById('minutes').addEventListener('input', calculateTrips);
+  document.getElementById('estimateBtn').addEventListener('click', estimateTrafficTime);
+  document.getElementById('useEstimateBtn').addEventListener('click', useTrafficEstimate);
 
   initDarkMode();
   loadAirports();

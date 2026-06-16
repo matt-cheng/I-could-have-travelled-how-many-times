@@ -10,14 +10,84 @@
 <body>
 <div class="container">
 <header>
-<h1>How many flights could you have taken instead of sitting in traffic?</h1>
+<h1>Sitting in Traffic Sucks</h1>
+<p class="subtitle">How many flights could you have taken instead of sitting in traffic?</p>
 <button id="darkToggle" class="dark-toggle" aria-label="Toggle dark mode">
 <span class="icon-sun">&#9788;</span>
 <span class="icon-moon">&#9790;</span>
 </button>
 </header>
 
+<div class="card" id="trafficEstimator">
+<h2>Traffic Time Estimator</h2>
+<p class="section-desc">Estimate how much time you spend sitting in traffic per year.</p>
+
+<label for="city-select">City You Commute In</label>
+<select id="city-select">
+<option value="">Select a city...</option>
+<option value="los-angeles">Los Angeles, CA</option>
+<option value="san-francisco">San Francisco, CA</option>
+<option value="new-york">New York, NY</option>
+<option value="seattle">Seattle, WA</option>
+<option value="chicago">Chicago, IL</option>
+<option value="washington-dc">Washington, DC</option>
+<option value="boston">Boston, MA</option>
+<option value="houston">Houston, TX</option>
+<option value="atlanta">Atlanta, GA</option>
+<option value="miami">Miami, FL</option>
+<option value="dallas">Dallas, TX</option>
+<option value="denver">Denver, CO</option>
+<option value="phoenix">Phoenix, AZ</option>
+<option value="portland">Portland, OR</option>
+<option value="san-diego">San Diego, CA</option>
+</select>
+
+<div class="grid">
+<div>
+<label for="commute-distance">One-Way Distance (miles)</label>
+<input type="number" id="commute-distance" value="15" min="1" max="200" step="0.5">
+</div>
+<div>
+<label for="peak-percent">% of Commute in Peak Traffic</label>
+<input type="number" id="peak-percent" value="80" min="0" max="100">
+</div>
+</div>
+
+<div class="grid">
+<div>
+<label for="days-per-week">Days Per Week</label>
+<input type="number" id="days-per-week" value="5" min="1" max="7">
+</div>
+<div>
+<label for="weeks-per-year">Weeks Per Year</label>
+<input type="number" id="weeks-per-year" value="50" min="1" max="52">
+</div>
+</div>
+
+<div class="traffic-result" id="trafficResult" style="display:none">
+<div class="traffic-stats">
+<div class="traffic-stat">
+<span id="dailyTraffic">—</span>
+<small>Extra Min/Day (Round Trip)</small>
+</div>
+<div class="traffic-stat">
+<span id="weeklyTraffic">—</span>
+<small>Extra Hours/Week</small>
+</div>
+<div class="traffic-stat">
+<span id="annualTraffic">—</span>
+<small>Hours/Year in Traffic</small>
+</div>
+</div>
+<p class="traffic-note" id="trafficNote"></p>
+</div>
+
+<button id="estimateBtn" class="btn-primary btn-secondary">Estimate Traffic Time</button>
+<button id="useEstimateBtn" class="btn-primary btn-use" style="display:none">Use This Estimate Above ↓</button>
+</div>
+
 <div class="card">
+<h2>Flight Comparison</h2>
 <div class="grid">
 <div>
 <label for="hours">Hours</label>
