@@ -43,6 +43,21 @@ app.js       — Traffic estimation, airport loading, search, calculation, URL s
 
 ## How it works
 
-**Traffic estimation** uses per-city congestion data (extra delay in minutes per mile during peak hours). The estimator calculates how much longer your commute takes versus free-flow conditions, then projects that daily loss across your work year.
+**Traffic estimation** uses per-city congestion data with two values per city:
+
+- `delayPerMile` — extra minutes of delay per mile during peak traffic (e.g. LA = 3.2, Phoenix = 1.8)
+- `freeFlowMph` — speed you'd travel with no traffic (e.g. NY = 25 mph, Houston = 38 mph)
+
+Calculation:
+
+1. Peak miles = commute distance × peak traffic %
+2. Extra delay (one way) = peak miles × city's `delayPerMile`
+3. Daily extra = one-way delay × 2 (round trip)
+4. Weekly = daily × days per week
+5. Annual = weekly × weeks per year
+
+Example: LA, 15-mile commute, 80% peak → `15 × 0.8 × 3.2 = 38.4 extra min/trip` → ~77 min/day → ~6.4 hrs/week → ~320 hrs/year.
+
+The congestion values are hardcoded approximations inspired by INRIX/TomTom congestion indices — not live data.
 
 **Flight time** is estimated as `distance / 550 mph`. Distance uses the haversine formula. The "around the world" stat divides total one-way miles flown by Earth's circumference (24,901 miles).
