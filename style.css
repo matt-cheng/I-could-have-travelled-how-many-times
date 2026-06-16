@@ -255,18 +255,24 @@ footer {
 .ts-dropdown .active { background: var(--stat-bg) !important; }
 .ts-dropdown .option { color: var(--text) !important; }
 
-.start-over {
+.btn-start-over {
   display: block;
-  text-align: center;
-  margin: 12px auto;
-  color: var(--accent);
-  font-size: 0.95rem;
-  text-decoration: none;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 12px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  transition: background 0.2s;
 }
 
-.start-over:hover {
-  text-decoration: underline;
+.btn-start-over:hover {
+  background: var(--accent-hover);
 }
 
 .estimator-toggle {

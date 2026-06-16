@@ -358,10 +358,7 @@
   document.getElementById('minutes').addEventListener('input', calculateTrips);
   document.getElementById('estimateBtn').addEventListener('click', estimateTrafficTime);
   document.getElementById('useEstimateBtn').addEventListener('click', useTrafficEstimate);
-  document.getElementById('startOver').addEventListener('click', function(e) {
-    e.preventDefault();
-    startOver();
-  });
+  document.getElementById('startOver').addEventListener('click', startOver);
   document.getElementById('toggleEstimator').addEventListener('click', function(e) {
     e.preventDefault();
     const panel = document.getElementById('trafficEstimator');
