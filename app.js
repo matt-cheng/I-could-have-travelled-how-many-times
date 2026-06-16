@@ -159,11 +159,8 @@
       }
     };
 
-    fromSelect = new TomSelect('#from-select', { ...tsConfig, placeholder: 'Search by city, airport, or code...' });
-    toSelect = new TomSelect('#to-select', { ...tsConfig, placeholder: 'Search by city, airport, or code...' });
-
-    fromSelect.setValue('LAX');
-    toSelect.setValue('HND');
+    fromSelect = new TomSelect('#from-select', { ...tsConfig, placeholder: 'e.g. LAX, Los Angeles, or JFK...' });
+    toSelect = new TomSelect('#to-select', { ...tsConfig, placeholder: 'e.g. HND, Tokyo, or LHR...' });
   }
 
   function getAirport(iata) {

@@ -5,7 +5,7 @@ How many flights could you have taken instead of sitting in traffic? Enter your 
 ## Features
 
 - **Flight Comparison** — Pick two airports and see how many one-way or round trips your wasted time equals
-- **Traffic Time Estimator** — Hidden by default; expand it to select your city, commute distance, and peak traffic percentage to calculate how many hours per year you lose to congestion. Supports 15 major US cities with built-in congestion data.
+- **Traffic Time Estimator** — Hidden by default; expand it to select your city, commute distance, and peak traffic percentage to calculate how many hours per year you lose to congestion. Supports 17 major US cities with built-in congestion data.
 - **One-click transfer** — Use the "Use This Estimate" button to pipe your annual traffic hours directly into the flight calculator
 - **Full worldwide airport database** — 10,000+ airports with IATA codes, loaded from [mwgg/Airports](https://github.com/mwgg/Airports)
 - **City search** — Find airports by city name, airport name, IATA code, or country
@@ -18,8 +18,10 @@ How many flights could you have taken instead of sitting in traffic? Enter your 
 
 Open `index.html` in a browser. No build step or server required.
 
-1. Enter your hours (and optionally minutes) in the Flight Comparison section
-2. Search and select departure and arrival airports
+All fields start empty with placeholder examples to guide input.
+
+1. Enter your hours (and optionally minutes) in the Flight Comparison section (e.g. 207 hours)
+2. Search and select departure and arrival airports (e.g. LAX → HND)
 3. Click **Calculate** to see how many flights you could have taken
 4. Share the URL or click **Copy Shareable Link**
 
@@ -54,7 +56,7 @@ Calculation:
 2. Extra delay (one way) = peak miles × city's `delayPerMile`
 3. Daily extra = one-way delay × 2 (round trip)
 4. Weekly = daily × days per week
-5. Annual = weekly × weeks per year
+5. Annual = weekly × 52 weeks
 
 Example: LA, 15-mile commute, 80% peak → `15 × 0.8 × 3.2 = 38.4 extra min/trip` → ~77 min/day → ~6.4 hrs/week → ~320 hrs/year.
 
