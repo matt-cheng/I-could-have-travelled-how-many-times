@@ -4,8 +4,8 @@ How many flights could you have taken instead of sitting in traffic? Enter your 
 
 ## Features
 
-- **Traffic Time Estimator** — Select your city, commute distance, and peak traffic percentage to calculate how many hours per year you lose to congestion. Supports 15 major US cities with built-in congestion data.
-- **Flight Comparison** — Pick two airports and see how many one-way or round trips your traffic time equals
+- **Flight Comparison** — Pick two airports and see how many one-way or round trips your wasted time equals
+- **Traffic Time Estimator** — Hidden by default; expand it to select your city, commute distance, and peak traffic percentage to calculate how many hours per year you lose to congestion. Supports 15 major US cities with built-in congestion data.
 - **One-click transfer** — Use the "Use This Estimate" button to pipe your annual traffic hours directly into the flight calculator
 - **Full worldwide airport database** — 10,000+ airports with IATA codes, loaded from [mwgg/Airports](https://github.com/mwgg/Airports)
 - **City search** — Find airports by city name, airport name, IATA code, or country
@@ -18,12 +18,16 @@ How many flights could you have taken instead of sitting in traffic? Enter your 
 
 Open `index.html` in a browser. No build step or server required.
 
+1. Enter your hours (and optionally minutes) in the Flight Comparison section
+2. Search and select departure and arrival airports
+3. Click **Calculate** to see how many flights you could have taken
+4. Share the URL or click **Copy Shareable Link**
+
+**Don't know your commute time?** Click the link below the Calculate button to expand the Traffic Time Estimator:
+
 1. Select your commute city, distance, and peak traffic percentage
 2. Click **Estimate Traffic Time** to see your annual hours lost
-3. Click **Use This Estimate** to fill in the flight comparison
-4. Search and select departure and arrival airports
-5. Click **Calculate** to see how many flights you could have taken
-6. Share the URL or click **Copy Shareable Link**
+3. Click **Use This Estimate** to auto-fill the hours into Flight Comparison
 
 ## Supported Cities
 
