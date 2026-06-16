@@ -29,7 +29,7 @@
     const distance = +document.getElementById('commute-distance').value;
     const peakPercent = +document.getElementById('peak-percent').value / 100;
     const daysPerWeek = +document.getElementById('days-per-week').value;
-    const weeksPerYear = +document.getElementById('weeks-per-year').value;
+    const weeksPerYear = 52;
 
     if (!cityKey || !distance) return;
 
