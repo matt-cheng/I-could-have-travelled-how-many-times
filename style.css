@@ -255,6 +255,20 @@ footer {
 .ts-dropdown .active { background: var(--stat-bg) !important; }
 .ts-dropdown .option { color: var(--text) !important; }
 
+.start-over {
+  display: block;
+  text-align: center;
+  margin: 12px auto;
+  color: var(--accent);
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.start-over:hover {
+  text-decoration: underline;
+}
+
 .estimator-toggle {
   display: block;
   text-align: center;

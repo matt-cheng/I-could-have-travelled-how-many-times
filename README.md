@@ -9,6 +9,7 @@ How many flights could you have taken instead of sitting in traffic? Enter your 
 - **One-click transfer** — Use the "Use This Estimate" button to pipe your annual traffic hours directly into the flight calculator
 - **Full worldwide airport database** — 10,000+ airports with IATA codes, loaded from [mwgg/Airports](https://github.com/mwgg/Airports)
 - **City search** — Find airports by city name, airport name, IATA code, or country
+- **Start Over** — Reset all fields and return to the empty form after viewing results
 - **Shareable URLs** — Results encoded in the URL; share a link and it auto-calculates on load
 - **Dark mode** — Toggle between light/dark themes; respects system preference and persists choice
 - **Around-the-world comparison** — Shows how many times your total miles would circumnavigate the globe
@@ -22,8 +23,9 @@ All fields start empty with placeholder examples to guide input.
 
 1. Enter your hours (and optionally minutes) in the Flight Comparison section (e.g. 207 hours)
 2. Search and select departure and arrival airports (e.g. LAX → HND)
-3. Click **Calculate** to see how many flights you could have taken
+3. Click **Calculate** — the form hides and results appear
 4. Share the URL or click **Copy Shareable Link**
+5. Click **Start Over** to reset everything and start fresh
 
 **Don't know your commute time?** Click the link below the Calculate button to expand the Traffic Time Estimator:
 

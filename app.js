@@ -207,9 +207,11 @@
     document.getElementById('flightTime').textContent = flight.toFixed(1);
     document.getElementById('distance').textContent = Math.round(dist).toLocaleString();
 
+    document.getElementById('flightCard').style.display = 'none';
     document.getElementById('results').style.display = 'block';
     document.getElementById('comparisonsCard').style.display = 'block';
     document.getElementById('shareBtn').style.display = 'inline-block';
+    document.getElementById('startOver').style.display = 'inline-block';
 
     buildComparisons(from, totalHours);
     updateUrl(fromCode, toCode, document.getElementById('hours').value, document.getElementById('minutes').value);
@@ -301,6 +303,27 @@
     }
   }
 
+  function startOver() {
+    document.getElementById('hours').value = '';
+    document.getElementById('minutes').value = '';
+    fromSelect.clear();
+    toSelect.clear();
+    document.getElementById('flightCard').style.display = 'block';
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('comparisonsCard').style.display = 'none';
+    document.getElementById('shareBtn').style.display = 'none';
+    document.getElementById('startOver').style.display = 'none';
+    document.getElementById('trafficEstimator').style.display = 'none';
+    document.getElementById('trafficResult').style.display = 'none';
+    document.getElementById('useEstimateBtn').style.display = 'none';
+    document.getElementById('toggleEstimator').textContent = "Don't know your commute time? Click here to estimate.";
+    document.getElementById('city-select').value = '';
+    document.getElementById('commute-distance').value = '';
+    document.getElementById('peak-percent').value = '';
+    document.getElementById('days-per-week').value = '';
+    history.replaceState(null, '', window.location.pathname);
+  }
+
   function copyShareableLink() {
     const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
@@ -335,6 +358,10 @@
   document.getElementById('minutes').addEventListener('input', calculateTrips);
   document.getElementById('estimateBtn').addEventListener('click', estimateTrafficTime);
   document.getElementById('useEstimateBtn').addEventListener('click', useTrafficEstimate);
+  document.getElementById('startOver').addEventListener('click', function(e) {
+    e.preventDefault();
+    startOver();
+  });
   document.getElementById('toggleEstimator').addEventListener('click', function(e) {
     e.preventDefault();
     const panel = document.getElementById('trafficEstimator');
