@@ -31,7 +31,7 @@ Open `index.html` in a browser. No build step or server required.
 
 ## Supported Cities
 
-Los Angeles, San Francisco, New York, Seattle, Chicago, Washington DC, Boston, Houston, Atlanta, Miami, Dallas, Denver, Phoenix, Portland, San Diego
+Los Angeles, San Francisco, New York, Seattle, Chicago, Washington DC, Boston, Houston, Atlanta, Miami, Dallas, Denver, Phoenix, Portland, San Diego, Austin, Las Vegas
 
 ## Files
 
