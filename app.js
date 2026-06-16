@@ -21,7 +21,9 @@
     'denver':         { name: 'Denver',         delayPerMile: 2.0, freeFlowMph: 37 },
     'phoenix':        { name: 'Phoenix',        delayPerMile: 1.8, freeFlowMph: 40 },
     'portland':       { name: 'Portland',       delayPerMile: 2.3, freeFlowMph: 33 },
-    'san-diego':      { name: 'San Diego',      delayPerMile: 2.1, freeFlowMph: 36 }
+    'san-diego':      { name: 'San Diego',      delayPerMile: 2.1, freeFlowMph: 36 },
+    'austin':         { name: 'Austin',         delayPerMile: 2.3, freeFlowMph: 35 },
+    'las-vegas':      { name: 'Las Vegas',      delayPerMile: 1.9, freeFlowMph: 38 }
   };
 
   function estimateTrafficTime() {
